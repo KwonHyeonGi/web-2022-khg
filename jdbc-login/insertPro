@@ -5,8 +5,14 @@
     
 <%
 		request.setCharacterEncoding("UTF-8");
-		String id = request.getParameter("id");
-		String passwd = request.getParameter("pwd");
+		
+		String id ="";
+		String name = "";
+		String passwd = "";
+
+		id = request.getParameter("id");
+		passwd = request.getParameter("pwd");
+		name = request.getParameter("name");
 		
 		//1. jdbc 드라이버 로드
 		Class.forName("org.mariadb.jdbc.Driver");
@@ -18,25 +24,21 @@
 		Connection con = DriverManager.getConnection(url, user, passwd);
 		
 		//3. SQL 실행 준비
-				//String sql = "insert into login(id, pwd) values('" + id +"', '"+ passwd +"')";		
-									// 변수이기때문에 values안에 들어가는 부분이 해석되기 위해서 " + id + " 가 되는것. 
-				//Statement stmt = con.createStatement();
-		String sql = "insert into login(id, pwd) values(?,?)";
+		String sql = "insert into login(id, name, pwd) values(?,?,?)";		
 		
 		
 		//4. SQL 실행
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
-		pstmt.setString(2, passwd);
+		pstmt.setString(2, name);
+		pstmt.setString(3, passwd);
 		pstmt.executeUpdate();		
-				//int i = stmt.executeUpdate(sql);
 		
 		//5. 객체 해제
-				//stmt.close();
 		pstmt.close();
 		con.close();
-		// "dbcon-login.jsp" 파일로 이동시키는 코드.
-		response.sendRedirect("dbcon-login.jsp");
+		// "list.jsp" 파일로 이동시키는 코드.
+		response.sendRedirect("list.jsp");
 
 %>
 <!DOCTYPE html>
