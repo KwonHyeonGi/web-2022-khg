@@ -43,9 +43,9 @@ String id = request.getParameter("id");
 		이름 : <input type="text" name="name" value = "<%=name %>"><br>
 		암호 : <input type="password" name="pwd" value = "<%=pwd %>"><br>
 		<input type="submit" name="변경저장">
-		<button type = "button" onclick ="location.href=''">삭제</button>
+		<button type = "button" onclick ="location.href='deletePro.jsp?id=<%=id%>'">삭제</button>
 		<button type = "button" onclick = "location.href='list.jsp'">사용자 조회</button>
-
+		<%-- 변경 저장은 submit으로! --%>
 	</form>
 </body>
 </html>
